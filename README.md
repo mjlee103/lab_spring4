@@ -1,3 +1,6 @@
 # lab_spring4
-sping 4.0 기반 MVC 패턴 설정
-스프링 수동 설정
+
+<h1>spring4.0기반 MVC 패턴 실습[수동설정]<h1>
+<img src="https://raw.githubusercontent.com/slalom0914/lab_spring4/main/images/injection1.gif">
+<br/>
+

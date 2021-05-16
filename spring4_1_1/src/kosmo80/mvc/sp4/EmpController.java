@@ -24,6 +24,9 @@ public class EmpController extends MultiActionController {
 		List<Map<String,Object>> empList = new ArrayList<>();
 		Map<String,Object> rmap = new HashMap<>();
 		rmap.put("mem_name", "이순신장군");
+		empList.add(rmap);
+		//NPE(NullPointerException)이 안 일어남. 
+		empList = empLogic.getEmpList();
 		//ModelAndView는 scope 속성이 request이다. 
 		mav.addObject("mem_name", empList);
 		mav.setViewName("di/getEmpList"); //경로 di까지 가져오기
@@ -37,6 +40,7 @@ public class EmpController extends MultiActionController {
 		logger.info("empInsert 호출 성공");
 		res.sendRedirect("di/empInsertOK.jsp");
 	}
+	//setter 객체 주입코드 
 	public void setEmpLogic(EmpLogic empLogic) {
 		this.empLogic = empLogic;
 	}

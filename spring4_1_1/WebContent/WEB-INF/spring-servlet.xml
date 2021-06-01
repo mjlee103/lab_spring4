@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
    <bean id="default-handler-mapping" 
    class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> <!-- 이렇게 하지말고, (이렇게 하면 한번에 한 메소드만 올 수 있음) -->
    <bean name="/di/hello.sp4" class="kosmo80.mvc.sp4.HelloController"/>
@@ -13,6 +14,8 @@
       <property name="methodNameResolver" ref="board-resolver"/>
       <property name="boardLogic" ref="board-logic"/>
    </bean>
+   
+   <!-- url을 매핑해주는 것(url catch) 브라우저에서 getBoardList.sp4 했을 때  -->
    <bean id="url-mapping"
    class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> <!-- 이거를 추천!!!! -->
    <!-- 이렇게 하면 메소드를 여러개가 올 수 있다. -->
@@ -21,6 +24,7 @@
             <!-- key구간 -->
             <!-- 이 URL이 어떤 것을 참조하고 있는지 -->
             <!-- 이 URL요청 값을 저 컨트롤러에 던지셈 -->
+            <prop key="/board/getBoardList.sp4">board-controller</prop>
             <prop key="/di/getEmpList.sp4">emp-controller</prop> <!-- 이 key에 대한 값이 emp-controller이다 -->
             <prop key="/di/empInsert.sp4">emp-controller</prop>
             <prop key="/di/empUpdate.sp4">emp-controller</prop>
@@ -28,10 +32,11 @@
          </props>
       </property>
    </bean>
+   <!-- PropertiesMethodNameResolver 자바의 메소드를 찾아주는 것 -->
    <bean id="board-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"> <!-- 이거를 추천!!!! -->
       <property name="mappings"> <!-- property에 있는건 이거 토씨 하나 절대 틀리면 안됨.  -->
          <props>
-            <prop key="/board/getBoardList.sp4">getBoardList</prop> <!-- 이 key에 대한 값이 emp-controller이다 -->
+            <prop key="/board/getBoardList.sp4">getBoardList</prop>
          </props>
       </property>
    </bean>

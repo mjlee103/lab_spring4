@@ -6,10 +6,12 @@
    <bean id="default-handler-mapping" 
    class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> <!-- 이렇게 하지말고, (이렇게 하면 한번에 한 메소드만 올 수 있음) -->
    <bean name="/di/hello.sp4" class="kosmo80.mvc.sp4.HelloController"/>
+   
    <bean id="emp-controller" class="kosmo80.mvc.sp4.EmpController">
       <property name="methodNameResolver" ref="emp-resolver"/>
       <property name="empLogic" ref="emp-logic"/> <!-- ref : 레퍼런스 -->
    </bean>
+   
    <bean id="board-controller" class="web.mvc.Board41Controller">
       <property name="methodNameResolver" ref="board-resolver"/>
       <property name="boardLogic" ref="board-logic"/>
@@ -25,6 +27,7 @@
             <!-- 이 URL이 어떤 것을 참조하고 있는지 -->
             <!-- 이 URL요청 값을 저 컨트롤러에 던지셈 -->
             <prop key="/board/getBoardList.sp4">board-controller</prop>
+            <prop key="/board/jsonGetBoardList.sp4">board-controller</prop>
             <prop key="/di/getEmpList.sp4">emp-controller</prop> <!-- 이 key에 대한 값이 emp-controller이다 -->
             <prop key="/di/empInsert.sp4">emp-controller</prop>
             <prop key="/di/empUpdate.sp4">emp-controller</prop>
@@ -37,6 +40,7 @@
       <property name="mappings"> <!-- property에 있는건 이거 토씨 하나 절대 틀리면 안됨.  -->
          <props>
             <prop key="/board/getBoardList.sp4">getBoardList</prop>
+            <prop key="/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
          </props>
       </property>
    </bean>

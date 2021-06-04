@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+
 public class HashMapBinder {
+	Logger logger = Logger.getLogger(HashMapBinder.class);
 	HttpServletRequest request = null;
 	public HashMapBinder() {}
 	public HashMapBinder(HttpServletRequest request) {
@@ -16,7 +19,9 @@ public class HashMapBinder {
 		//<input type="text" name="mem_id"
 		while(en.hasMoreElements()) { //while (true) 주면 무한 루프 
 			String key = (String)en.nextElement(); //(String) casting 연산자 -> 강제 형변환
-			target.put(key,  request.getParameter(key));
+			logger.info("value:"+request.getParameter(key));
+			target.put(key,  HangulConversion.toUTF(request.getParameter(key)));
+			logger.info("value:"+target);
 		}
 	}//////// end of bind
 }

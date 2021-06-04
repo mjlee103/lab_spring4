@@ -44,4 +44,5 @@ public class EmpController extends MultiActionController {
 	public void setEmpLogic(EmpLogic empLogic) {
 		this.empLogic = empLogic;
 	}
+
 }

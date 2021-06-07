@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 public class HashMapBinder {
 	Logger logger = Logger.getLogger(HashMapBinder.class);
 	HttpServletRequest request = null;
-	public HashMapBinder() {}
+//	public HashMapBinder() {}
 	public HashMapBinder(HttpServletRequest request) {
 		this.request = request;
 	}

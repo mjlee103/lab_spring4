@@ -23,7 +23,6 @@ public class Board41Controller extends MultiActionController {
 	private Board41Logic boardLogic = null;
 	//setter메소드를 통하여 게으른 객체 주입
 	public void setBoardLogic(Board41Logic boardLogic) {
-		logger.info("나 가져오니");
 		this.boardLogic = boardLogic;
 	}
 	//request로 유지
@@ -95,12 +94,29 @@ public class Board41Controller extends MultiActionController {
 		hmb.bind(target);
 		List<Map<String,Object>> boardList = null;
 		boardList=boardLogic.getBoardList(target);
-		logger.info("boardLIst 호출 성공");
+		logger.info("boardList 호출 성공");
 		Gson g = new Gson();
 		String imsi = g.toJson(boardList);
 		res.setContentType("application/json;charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.print(imsi);
+	}
+	public void boardInsert(HttpServletRequest req, HttpServletResponse res)
+	throws Exception
+	{
+		logger.info("boardInsert 호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String, Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라언트에게 요청한 값을 넘긴다. 
+		hmb.bind(pmap);
+		int boardInsert = 0;
+		boardInsert = boardLogic.boardInsert(pmap);
+		if(boardInsert == 1) {
+			res.sendRedirect("./getBoardList.jsp");
+		}
+		else {
+			res.sendRedirect("등록실패 페이지 이동처리");
+		}
 	}
 }
 		

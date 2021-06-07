@@ -32,4 +32,13 @@ public class Board41MDao {
 		return boardList;
 	}
 
+
+	public int boardMInsert(Map<String, Object> pmap) {
+		logger.info("boardMInsert 호출 성공");
+		int boardInsert = 1;
+		
+		return boardInsert;		
+	}
+
+
 }

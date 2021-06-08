@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let count = 0;// 변수에 앞으로 var를 사용하지 않습니다. 
+    myFnc();
+
+    function myFnc(){
+    count++;
+    document.write("hello" + count, "<br>");
+    //s6에서 추가되었음. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals
+    document.write(`hello + ${count}, <br>`);
+    }
+    myFnc();
+    //hoisting
+    const theFnc = function(){
+      count++;
+      //document.write("bye"+count, "<br>");
+      document.write(`bye+ ${count}, <br>`);
+    }
+    theFnc();
+  </script>
+</body>
+</html>

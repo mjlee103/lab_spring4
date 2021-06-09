@@ -19,7 +19,7 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish
   }
   {
     const num = 0;
-    const messsage = num || 'undefinded';
+    const message = num || 'undefinded';
     console.log(message);
   }
   

@@ -48,9 +48,9 @@ public class Board41Controller extends MultiActionController {
 		List<Map<String,Object>> boardList = null;
 		boardList=boardLogic.getBoardList(target);
 		ModelAndView mav = new ModelAndView();
-		logger.info("boardLIst 호출 성공"+boardList);
-		mav.setViewName("board/getBoardList");
-		mav.addObject("boardList", boardList);
+		logger.info("boardList 호출 성공"+boardList);
+		mav.setViewName("board/getBoardList"); //mav.setViewName("뷰의 경로")
+		mav.addObject("boardList", boardList); //데이터 보내는 메소드 addObject("변수이름", "데이터값")
 		return mav;
 	}	
 		
@@ -88,36 +88,37 @@ public class Board41Controller extends MultiActionController {
 	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res) 
 	throws Exception	
 	{
-		logger.info("getBoardList 호출 성공");
-		HashMapBinder hmb = new HashMapBinder(req);
-		Map<String,Object> target = new HashMap<>();
-		hmb.bind(target);
+		logger.info("jsonGetBoardList 호출 성공");
 		List<Map<String,Object>> boardList = null;
-		boardList=boardLogic.getBoardList(target);
-		logger.info("boardList 호출 성공");
+		boardList = boardLogic.getBoardList(null);
 		Gson g = new Gson();
-		String imsi = g.toJson(boardList);
+		String imsi = g.toJson(boardList); //toJson을 하면 json이 만들어지는 것이다.
+		//쉽게 말해서 웹서버는 브라우저로 전송될 페이지가 html 인경우 text/html을 표준 MIME 타입으로 지정합니다. 
+		//그러나 필요에 의해서 이 MIME 타입을 변경하고자 할 경우나 또는 캐릭터의 인코딩셋을 변경하고자 할때 
+		//setContentType 메소드를 사용할 수 있습니다. 브라우져는 이 MIME 타입을 확인하고 어떤 파일의 스트림(stream)인 줄 알 수 있습니다.
 		res.setContentType("application/json;charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.print(imsi);
 	}
+	
 	public void boardInsert(HttpServletRequest req, HttpServletResponse res)
 	throws Exception
 	{
-		logger.info("boardInsert 호출 성공");
+		logger.info("boardInsert호출 성공");
 		HashMapBinder hmb = new HashMapBinder(req);
-		Map<String, Object> pmap = new HashMap<>();
-		//사용자가 입력한 값이나 서버에서 클라언트에게 요청한 값을 넘긴다. 
+		Map<String,Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
 		hmb.bind(pmap);
-		int boardInsert = 0;
-		boardInsert = boardLogic.boardInsert(pmap);
-		if(boardInsert == 1) {
-			res.sendRedirect("./getBoardList.jsp");
+		int result = 0;
+		result = boardLogic.boardInsert(pmap);
+		if(result == 1) {
+			//res.sendRedirect("./getBoardList.sp4");
 		}
 		else {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
 	}
+
 }
 		
 //		boardList = new ArrayList<>();

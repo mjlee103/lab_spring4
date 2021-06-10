@@ -10,7 +10,7 @@
 
   function myFnc(){
     count++;
-    DocumentFragment.write("hello" + count, "<br>");
+    document.write("hello" + count, "<br>");
   }
   myFnc();
 }

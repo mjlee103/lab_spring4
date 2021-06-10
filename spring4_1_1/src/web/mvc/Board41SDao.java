@@ -11,16 +11,12 @@ public class Board41SDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
-
 	public int boardSInsert(Map<String, Object> pmap) {
 		logger.info("boardSInsert 호출 성공");
-		int boardInsert = 1;
-		
-		return boardInsert;
-		
+		int result=0;
+		pmap.put("bs_seq", 1);
+		pmap.put("bs_size", 50);
+		sqlSessionTemplate.insert("boardSInsert",pmap);
+		return result;
 	}
-
-
-	
-}	
-	
+}

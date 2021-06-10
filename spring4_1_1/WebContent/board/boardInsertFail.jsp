@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <script>
-	alert("ê¸€ì“°ê¸° ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+	alert("±Û¾²±â ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
 </script>

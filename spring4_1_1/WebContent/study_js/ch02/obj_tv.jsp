@@ -12,21 +12,18 @@
 	tv.color = "black";
 	tv.price = 300000;
 	tv.info = function(){
-		document.write("색상: "+tv.color,"<br>");
-		document.write("가격: "+tv.price,"<br>");	
+		document.write("색상 : "+tv.color,"<br>");
+		document.write("가격 : "+tv.price,"<br>");
 	}
 	tv.info();
 	const today = new Date();
 	const mon = today.getMonth();
 	const date = today.getDate();
-	const day = todya.getDay();
+	const day = today.getDay();
 	const worldCup = new Date(2020,4,30);
 	const mon = worldCup.getMonth();
 	const date = worldCup.getDate();
 	const day = worldCup.getDay();
 </script>
-	색상: black
-	<br>
-	가격: 300000
 </body>
 </html>

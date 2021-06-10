@@ -7,14 +7,14 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function send(){
-		document.f_test.commit();
+		document.f_test.submit();
 	}
 </script>
 </head>
 <body>
-	<form name="f_test" action="./getBoardList.sp4" method="post" onSubmit="send()">
+	<form name="f_test" action="./getBoardList.sp4" method="post">
 		<input type="text" name="mem_name">
-		<button onClick="sned()">전송</button>
+		<button onClick="send()">전송</button>
 	</form>
 </body>
 </html>

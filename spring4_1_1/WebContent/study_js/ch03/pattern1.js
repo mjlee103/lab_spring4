@@ -7,10 +7,10 @@
 
   const auto_1 = setInterval(function(){
     addNum++;
-    console.log("addNum: "+addNum);
+    console.log("addNum: "+ addNum);
   },3000);
   const auto_2 = setInterval(function(){
     subNum--;
-    console.log("subNum: "+subNum);
-  },3000)
+    console.log("subNum: "+ subNum);
+  },3000);
 }

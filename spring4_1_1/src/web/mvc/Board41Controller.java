@@ -46,62 +46,30 @@ public class Board41Controller extends MultiActionController {
 		Map<String,Object> target = new HashMap<>();
 		hmb.bind(target);
 		List<Map<String,Object>> boardList = null;
-		boardList=boardLogic.getBoardList(target);
+		boardList=boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		logger.info("boardList:"+boardList);//
 		ModelAndView mav = new ModelAndView();
-		logger.info("boardList 호출 성공"+boardList);
-		mav.setViewName("board/getBoardList"); //mav.setViewName("뷰의 경로")
-		mav.addObject("boardList", boardList); //데이터 보내는 메소드 addObject("변수이름", "데이터값")
+		mav.setViewName("board/getBoardList");
+		mav.addObject("boardList", boardList);
+		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		//view.forward(req, res);
 		return mav;
-	}	
-		
-//		boardList = new ArrayList<>();
-//		Map<String,Object> rmap = new HashMap<>();
-//		rmap.put("mem_id", "tomato");
-//		rmap.put("mem_pw", "123");
-//		rmap.put("mem_name", "이순신");
-//		boardList.add(rmap);
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "apple");
-//		rmap.put("mem_pw", "125");
-//		rmap.put("mem_name", "강감찬");
-//		boardList.add(rmap);
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "nice");
-//		rmap.put("mem_pw", "126");
-//		rmap.put("mem_name", "김유신");
-//		boardList.add(rmap);
-//		boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
-//		ModelAndView mav = new ModelAndView();
-//		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-//		view.forward(req, res);
-//		String name="이순신";
-//		//mav.setViewName("a.jsp");
-//		mav.addObject("name", name);
-//		HttpSession session = req.getSession();
-//		session.setAttribute("name", name);
-//		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-//		//view.forward(req, res);
-//		return mav;
-//	}
-	
+	}
 	//json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView, String
-	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res) 
-	throws Exception	
+	//@RestController
+	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res)
+	throws Exception 
 	{
 		logger.info("jsonGetBoardList 호출 성공");
 		List<Map<String,Object>> boardList = null;
 		boardList = boardLogic.getBoardList(null);
 		Gson g = new Gson();
-		String imsi = g.toJson(boardList); //toJson을 하면 json이 만들어지는 것이다.
-		//쉽게 말해서 웹서버는 브라우저로 전송될 페이지가 html 인경우 text/html을 표준 MIME 타입으로 지정합니다. 
-		//그러나 필요에 의해서 이 MIME 타입을 변경하고자 할 경우나 또는 캐릭터의 인코딩셋을 변경하고자 할때 
-		//setContentType 메소드를 사용할 수 있습니다. 브라우져는 이 MIME 타입을 확인하고 어떤 파일의 스트림(stream)인 줄 알 수 있습니다.
+		String imsi = g.toJson(boardList);
 		res.setContentType("application/json;charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.print(imsi);
 	}
-	
-	public void boardInsert(HttpServletRequest req, HttpServletResponse res)
+	public void boardInsert(HttpServletRequest req, HttpServletResponse res) 
 	throws Exception
 	{
 		logger.info("boardInsert호출 성공");
@@ -120,25 +88,3 @@ public class Board41Controller extends MultiActionController {
 	}
 
 }
-		
-//		boardList = new ArrayList<>();
-//		Map<String,Object> rmap = new HashMap<>();
-//		rmap.put("mem_id", "tomato");
-//		rmap.put("mem_pw", "123");
-//		rmap.put("mem_name", "이순신");
-//		boardList.add(rmap);
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "apple");
-//		rmap.put("mem_pw", "125");
-//		rmap.put("mem_name", "강감찬");
-//		boardList.add(rmap);
-//		rmap = new HashMap<>();
-//		rmap.put("mem_id", "nice");
-//		rmap.put("mem_pw", "126");
-//		rmap.put("mem_name", "김유신");
-//		boardList.add(rmap);
-//		Gson g = new Gson();
-//		String imsi = g.toJson(boardList);
-//		res.setContentType("application/json;charset=utf-8");
-//		PrintWriter out = res.getWriter();
-//		out.print(imsi);

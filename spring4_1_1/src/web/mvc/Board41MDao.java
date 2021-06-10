@@ -17,7 +17,6 @@ public class Board41MDao {
 	public List<Map<String, Object>> getBoardList(Map<String, Object> pmap) {
 		List<Map<String, Object>> boardList = null;
 		//List<BoardMVO> boardList2 = null;
-		//selectList("쿼리 id", 조건)
 		boardList = sqlSessionTemplate.selectList("getBoardList",pmap);
 		/*
 		boardList2 = sqlSessionTemplate.selectList("getBoardMap",pmap);

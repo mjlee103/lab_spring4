@@ -54,7 +54,7 @@
         <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
     </div>   
     <!--=========================== [[글쓰기 화면 시작]] =============================-->
-    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'true'" style="width:600px;height:350px;padding:10px">
+    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save'" style="width:600px;height:350px;padding:10px">
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" label="Email:" labelPosition="top" data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;">
         </div>
@@ -67,11 +67,11 @@
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" label="Company:" labelPosition="top" style="width:100%;">
         </div>
-
+        
         <div>
             <a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">Register</a>
         </div>
     </div>    
     <!--=========================== [[글쓰기 화면   끝 ]] =============================-->
 </body>
-</html> 
+</html>

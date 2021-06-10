@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/commonUIglobal.jsp"%>
+<%@ include file="/common/commonUIglobal.jsp"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,20 +10,20 @@
   <title>Document</title>
   <script type="text/javascript">
   	function test(){
-	  	let age = prompt('당신의 나이는?', 0);
-	    if(age>=20){
-	      document.write("당신은 성인입니다.");
-	    } 
-	    else{
-	        document.write("당십은 미성년입니다.");
-	    }
+  	  	let age = prompt('당신의 나이는?',0);
+  	  	if(age>=20){
+  	      document.write("당신은 성인입니다.");
+  	    } 
+  	    else{
+  	      document.write("당신은 미성년자 입니다.");
+  	    }  		
   	}
-   </script>
+  </script>
 </head>
 <body>
 여기
-  <script type="text/javascript">test();</script>
-  <br>
+<script type="text/javascript">test();</script>
+<br>
   저기
 </body>
 </html>

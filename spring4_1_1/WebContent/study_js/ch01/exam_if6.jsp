@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/commonUIglobal.jsp"%>
+<%@ include file="/common/commonUIglobal.jsp"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script type="text/javascript">
- 	function test(){
-  	let age = prompt('당신의 나이는?', 0);
-    if("안녕"){
-      document.write("당신은 성인입니다.");
-    } 
-    else{
-        document.write("당십은 미성년입니다.");
-    }
- 	}
+  	function test(){
+  		let x = 10;
+  		let y = 5;
+  		var result = x > y ? "javascript": "hello";
+  		document.write(result);
+  	}
   </script>
 </head>
 <body>
 여기
-	<script type="text/javascript">test;</script>
+<script type="text/javascript">test();</script>
+<br>
+  저기
 </body>
 </html>

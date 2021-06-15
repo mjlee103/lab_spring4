@@ -55,14 +55,45 @@ public class Board41Controller extends MultiActionController {
 		//view.forward(req, res);
 		return mav;
 	}
+	/*****************************************************************************
+	 * 게시글 상세보기 구현
+	 * @param req
+	 * @param res
+	 * @return ModelAndView
+	 * @throws Exception
+	 * 주의사항 - 전체조회와 하나로 합쳐 지니까 target에 구분값을 추가할것.
+	 ****************************************************************************/
+	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) 
+			throws Exception
+	{
+		logger.info("getBoardDetail 호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> target = new HashMap<>();
+		hmb.bind(target);//bm_no값 담음.
+		//target이 결정된 후에 put이 일어난다.값이 getBoardList에 그대로 전달 됨. 
+		target.put("gubun", "detail");
+		logger.info("bm_no : "+target.get("bm_no"));
+		List<Map<String,Object>> boardDetail = null;
+		boardDetail=boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		logger.info("boardList:"+boardDetail);//
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/read");
+		mav.addObject("boardDetail", boardDetail);
+		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		//view.forward(req, res);
+		return mav;
+	}
 	//json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView, String
 	//@RestController
 	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res)
 	throws Exception 
 	{
 		logger.info("jsonGetBoardList 호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> target = new HashMap<>();
+		hmb.bind(target);		
 		List<Map<String,Object>> boardList = null;
-		boardList = boardLogic.getBoardList(null);
+		boardList = boardLogic.getBoardList(target);
 		Gson g = new Gson();
 		String imsi = g.toJson(boardList);
 		res.setContentType("application/json;charset=utf-8");

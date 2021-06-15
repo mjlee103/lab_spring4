@@ -11,4 +11,5 @@
 		<property name="bsboardMDao" ref="bsboard-mdao"/>
 		<property name="bsboardSDao" ref="bsboard-sdao"/>
 	</bean>
+	<bean id="upload-logic" class="web.mvc.UploadLogic"/>
 </beans>

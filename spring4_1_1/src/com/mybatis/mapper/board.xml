@@ -25,7 +25,7 @@
 		DELETE FROM board_sub2019 WHERE bm_no=#{bm_no}
 	</delete>
 	<select id="getBmNo" parameterType="int" resultType="int">
-		SELECT NVL((SELECT /*+index_desc(board_master2019 BM_NO_PK)*/ bm_no
+		SELECT NVL((SELECT /*+index_desc(board_master2019 BOARD_MNO_PK)*/ bm_no
 		              FROM board_master2019
 		             WHERE rownum=1),0)+1 bm_no FROM dual
 	</select>
@@ -39,7 +39,7 @@
 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email
 		                           , bm_content, bm_date, bm_group, bm_pos, bm_step, bm_pw) 
 		                      values(#{bm_no},#{bm_title},#{bm_writer},#{bm_email}
-		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), 0,0,0,#{bm_pw}
+		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), #{bm_group},#{bm_pos},#{bm_step},#{bm_pw}
 		                            )
 	</insert>
 	<insert id="boardSInsert" parameterType="map">
@@ -54,15 +54,20 @@
 		UPDATE board_master2019
 		   SET bm_step = bm_step + 1
 		 WHERE bm_group = #{bm_group}
-		 <![CDATA[ and bm_step > #{bm_step ]]>
+		 <![CDATA[ and bm_step > #{bm_step} ]]>
 	</update>
 	<select id="getBoardList" parameterType="map" resultType="map">
 		 SELECT bm.bm_no, bm.bm_title, bm.bm_date, bs.bs_file, bm.bm_hit
+		       ,bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_email, bm.bm_pw
+		       ,bm.bm_writer, bm.bm_content
 		  FROM board_master2019 bm
 		      ,board_sub2019 bs
 		 WHERE bm.bm_no = bs.bm_no(+)	
 		<if test='cb_search!=null and cb_search.equals("bm_title")'>
 	  	   AND bm.bm_title LIKE '%'||#{tb_search}||'%'
+		</if>	 
+		<if test='bm_no > 0'>
+	  	   AND bm.bm_no = #{bm_no}
 		</if>	 
 		ORDER BY bm_group  desc, bm_step asc
 	</select>

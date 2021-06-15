@@ -17,12 +17,18 @@
 		<property name="methodNameResolver" ref="board-resolver"/>
 		<property name="bsboardLogic" ref="bsboard-logic"/>
 	</bean>
+	<bean id="upload-controller" class="web.mvc.UploadController">
+		<property name="methodNameResolver" ref="board-resolver"/>
+		<property name="uploadLogic" ref="upload-logic"/>
+	</bean>
 	<bean id="url-mapping" 
 	class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/upload/uploadForm.sp4">upload-controller</prop>
 				<prop key="/board/boardInsert.sp4">board-controller</prop>
 				<prop key="/board/getBoardList.sp4">board-controller</prop>
+				<prop key="/board/getBoardDetail.sp4">board-controller</prop>
 				<prop key="/board/jsonGetBoardList.sp4">board-controller</prop>
 				<prop key="/bs_board/boardInsert.sp4">bsboard-controller</prop>
 				<prop key="/bs_board/getBoardList.sp4">bsboard-controller</prop>
@@ -37,6 +43,8 @@
 	<bean id="board-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
+				<prop key="/upload/uploadForm.sp4">uploadForm</prop>
+				<prop key="/board/getBoardDetail.sp4">getBoardDetail</prop>
 				<prop key="/board/getBoardList.sp4">getBoardList</prop>
 				<prop key="/board/boardInsert.sp4">boardInsert</prop>
 				<prop key="/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>

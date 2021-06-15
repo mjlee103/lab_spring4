@@ -38,7 +38,7 @@ public class BS_BoardController extends MultiActionController {
 	//말하는 것은 앞뒤가 맞지 않는 것입니다. 이상한 태도를 보이는 것이죠
 	//굳이 없어도 되는 것을 형식적으로 가지고 있어야 한다. doGet안에 있는 것이니까 너도 있어야 해줄거야? 라고 말하는 것이죠
 	
-	public ModelAndView getBoardList(HttpServletRequest req, HttpServletResponse res) 
+	public void getBoardList(HttpServletRequest req, HttpServletResponse res) 
 	throws Exception
 	{
 		logger.info("getBoardList 호출 성공");
@@ -48,12 +48,9 @@ public class BS_BoardController extends MultiActionController {
 		List<Map<String,Object>> boardList = null;
 		boardList=bsboardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
 		logger.info("boardList:"+boardList);//
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("bs_board/getBoardList");
-		mav.addObject("boardList", boardList);
-		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-		//view.forward(req, res);
-		return mav;
+		req.setAttribute("boardList", boardList);
+		RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		view.forward(req, res);
 	}
 	//json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView, String
 	//@RestController

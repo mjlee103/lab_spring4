@@ -17,8 +17,19 @@ public class Board41Logic {
 	}
 	
 	public List<Map<String,Object>> getBoardList(Map<String, Object> pmap) {
-		logger.info("getBoardList 호출 성공");
+		logger.info("getBoardList 호출 성공"+pmap.containsKey("gubun"));
 		List<Map<String,Object>> boardList = null;
+		String gubun = null;
+		//null이 아닌지 확인한 다음 초기화를 진행한다. null이 아닐때만 타게 된다. 
+		if(pmap.get("gubun")!=null) {
+			gubun = pmap.get("gubun").toString();			
+		}
+		//상세조회.
+		if(gubun!=null && "detail".equals(gubun)) {
+			int bm_no = 0;
+			bm_no = Integer.parseInt(pmap.get("bm_no").toString());
+			boardMDao.hitCount(bm_no);
+		}
 		boardList = boardMDao.getBoardList(pmap);
 		return boardList;
 	}
@@ -26,14 +37,35 @@ public class Board41Logic {
 	public int boardInsert(Map<String, Object> pmap) {
 		logger.info("boardInsert 호출 성공");
 		int result = 0;
-		int fileOk = 0;
-		boardMDao.boardMInsert(pmap);
-		//첨부파일이 있어?
-		
-		if(pmap.containsKey("bs_file")) {
-			fileOk = boardSDao.boardSInsert(pmap);
+		int bm_no = 0;
+		bm_no = boardMDao.getBmNo();
+		pmap.put("bm_no", bm_no);
+		int bm_group = 0;
+		if(pmap.get("bm_group")!=null) {//read.jsp눌렀다
+			bm_group = Integer.parseInt(pmap.get("bm_group").toString());
 		}
-		logger.info("fileOk : "+fileOk);
+		//댓글이야?
+		if(bm_group > 0) {
+			boardMDao.bmStepUpdate(pmap);//조건에 맞지 않으면 처리가 생략될 수 있다.
+			pmap.put("bm_pos", Integer.parseInt(pmap.get("bm_pos").toString())+1);
+			pmap.put("bm_step", Integer.parseInt(pmap.get("bm_step").toString())+1);
+		}
+		//너 새글이구나
+		else {
+			bm_group = boardMDao.getBmGroup();
+			logger.info("첨부파일 처리 로직 경유");
+			pmap.put("bm_group", bm_group);
+			pmap.put("bm_pos",0);
+			pmap.put("bm_step",0);
+		}
+		//첨부파일이 있어?
+		if((pmap.get("bs_file")!=null)&(pmap.get("bs_file").toString().length() > 0)) {
+			logger.info("첨부파일 처리 로직 경유");
+			pmap.put("bm_no", bm_no);
+			pmap.put("bm_seq", 1);
+			boardSDao.boardSInsert(pmap);			
+		}
+		boardMDao.boardMInsert(pmap);
 		result = 1;
 		return result;
 	}

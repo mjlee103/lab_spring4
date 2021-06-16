@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/commons-dbcp2-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/commons-pool2-2.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/javax.mail-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/log4j-core-2.14.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/mybatis-3.4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/mybatis-spring-2.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-aop-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-beans-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-context-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-core-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-dao-2.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-expression-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-jdbc-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-tx-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-web-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mjlee/Desktop/jar/spring-webmvc-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

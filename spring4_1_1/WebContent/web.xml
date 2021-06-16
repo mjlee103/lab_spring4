@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring-service.xml
+			,/WEB-INF/spring-data.xml
+			,/WEB-INF/prac-service.xml
+			,/WEB-INF/prac-data.xml
+		</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener> <!-- 리스너가 없으면 아무짝에 쓸모없는 똥쓰레기!!! -->
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<!-- 디스패쳐. .sp4로 들어오는 모든것들을 얘가 인터셉트 해서 처리함.(FrontController) -->
+	<!-- 어느 컨트롤러에 뿌려줄까? 그리고 그 리턴값을 어느 view에 뿌려줄까? -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name> <!-- org.도메인.패키지.표준.class(디스패쳐서블릿) -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.sp4</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 연습!!!!!!!!!!! -->
+	<servlet>
+		<servlet-name>appServlet2</servlet-name> <!-- org.도메인.패키지.표준.class(디스패쳐서블릿) -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/prac-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>appServlet2</servlet-name>
+		<url-pattern>*.hr4</url-pattern>
+	</servlet-mapping>
+	<!-- 연습끝!!!!!!!!! -->
+	
+</web-app>

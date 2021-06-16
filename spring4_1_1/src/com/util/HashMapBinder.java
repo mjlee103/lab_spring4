@@ -32,6 +32,7 @@ public class HashMapBinder {
 	public void multiBind(Map<String, Object> target) {
 		target.clear();
 		try {
+			//MultipartRequest 는 파일 가져오는 request라서 파일이 없는 댓글은 multiBind를 타면 안됨 => 에러 먹음. 
 			multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 		}
 		catch (Exception e) {

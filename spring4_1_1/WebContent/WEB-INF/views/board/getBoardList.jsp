@@ -115,27 +115,25 @@
 		<tr>
 	            <td><%=rmap.get("BM_NO") %></td>
 <!-- 너 댓글이니? -->
+<td>
 <%
 	String imgPath = "\\board\\";
 	if(Integer.parseInt(rmap.get("BM_POS").toString())>0){
 		for(int j=0; j<Integer.parseInt(rmap.get("BM_POS").toString());j++){
-%>
-	<td>
-<%
 			out.print("&nbsp;&nbsp;");
 			
 		}
 %>
+
 	<!-- 여기는 html땅이다 -->
-	<img src="<%=imgPath %>reply.gif" border="0"><%=rmap.get("BM_TITLE") %></a></td>
+	<img src="<%=imgPath %>reply.gif" border="0">
 <%
-	}else {////////////end of if
+	}////////////end of if
 %>
-	       <td><a href="getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>"><%=rmap.get("BM_TITLE") %></a></td>
+	      <a href="getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO") %>"><%=rmap.get("BM_TITLE") %></a></td>
 <%
-	}
-%>
-	       
+	
+%>	       
 	            <td><%=rmap.get("BM_DATE") %></td>
 	            <td><a href="download.jsp?bs_file=<%=rmap.get("BS_FILE") %>" style="text-decoration:none;"><%=rmap.get("BS_FILE") %></a></td>
 	            <td><%=rmap.get("BM_HIT") %></td>

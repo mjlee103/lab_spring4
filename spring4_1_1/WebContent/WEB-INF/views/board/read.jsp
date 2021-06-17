@@ -30,7 +30,7 @@
 		bm_pos = boardDetail.get(0).get("BM_POS").toString();
 		bm_step = boardDetail.get(0).get("BM_STEP").toString();
 	}
-	out.print("size : "+size);
+	out.print("boardDetail : "+boardDetail);
 	//out.print("boardDetail:"+boardDetail); <-주소번지 알려주는 코드>
 %> 
 <!DOCTYPE html>
@@ -47,17 +47,26 @@
 <script type="text/javascript">
 //댓글쓰기
 	function repleForm(){
-		$("#dlg_boardAdd").dialog('open');
+		$("#dlg_ins").dialog('open');
+	}
+	function insAction(){
+		console.log("입력액션 호출");
+		$('#board_ins').submit();
+	}
+	function updateForm(){
+		console.log("저장액션 호출");
+		$('#dlg_upd').dialog({
+		    title: '글수정',
+		    width: 600,
+		    height: 600,
+		    closed: false,
+		    cache: false,
+		    href: 'updateForm.sp4?bm_writer=<%=bm_writer%>&bm_content=<%=bm_content%>&bm_no=<%=bm_no%>&bs_file=<%=bs_file%>',
+		    modal: true
+		});
 	}
 	function boardList(){
 		location.href="./getBoardList.sp4";
-	}
-	function boardList(){
-		
-	}
-	function addAction(){
-		console.log("저장액션 호출");
-		$('#f_boardAdd').submit();		
 	}
 </script>
 </head>
@@ -91,57 +100,38 @@
 	    <a href="javascript:boardDelView()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">삭제</a>
 	    <a href="javascript:boardList()" class="easyui-linkbutton" iconCls="icon-search" plain="true">목록</a>
 	</div>
-	<!--================== [[댓글쓰기 화면]] ==================-->
-	<div id="dlg_boardAdd" title="댓글쓰기" class="easyui-dialog" style="width:600px;height:400px;padding:10px" data-options="closed:'true',modal:'true',footer:'#tbar_boardAdd'">	
-	<!-- 
-	form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
-	MultipartRequest  => cos.jar
-	 -->	
-		<form id="f_boardAdd" method="post" action="boardInsert.sp4">
-		<input type="hidden" name="bm_no" value="<%=bm_no%>">
-		<input type="hidden" name="bm_group" value="<%=bm_group%>">
-		<input type="hidden" name="bm_pos" value="<%=bm_pos%>">
-		<input type="hidden" name="bm_step" value="<%=bm_step%>">
-		<!-- <form id="f_boardAdd"> -->
-		<table>
-			<tr>
-				<td width="100px">제목</td>
-				<td width="500px">
-					<input class="easyui-textbox" data-options="width:'350px'" id="bm_title" name="bm_title" required>
-				</td>
-			</tr>
-			<tr>	
-				<td width="100px">작성자</td>
-				<td width="500px">
-					<input class="easyui-textbox" data-options="width:'150px'" id="bm_writer" name="bm_writer" required>
-				</td>
-			</tr>
-			<tr>
-				<td width="100px">이메일</td>
-				<td width="500px">
-					<input class="easyui-textbox" data-options="width:'250px'" id="bm_email" name="bm_email">
-				</td>
-			</tr>
-			<tr>			
-				<td width="100px">내용</td>
-				<td width="500px">
-					<input class="easyui-textbox" id="bm_content" name="bm_content" data-options="multiline:'true',width:'400px',height:'90px'" required>
-				</td>
-			</tr>
-			<tr>			
-				<td width="100px">비번</td>
-				<td width="500px">
-					<input class="easyui-textbox" data-options="width:'100px'" id="bm_pw" name="bm_pw" required>
-				</td>
-			</tr>
-		</table>
-		</form>
-	</div>
-	<!-- 입력 화면 버튼 추가 -->
-	<div id="tbar_boardAdd" align="right">
-		<a href="javascript:addAction()" class="easyui-linkbutton" iconCls="icon-save">저장</a>
-		<a href="javascript:$('#dlg_boardAdd').dialog('close')" 
-		   class="easyui-linkbutton" iconCls="icon-cancel">닫기</a>
-	</div>
+		<!--=========================== [[글쓰기 화면 시작]] =============================-->
+    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'false', footer:'#ft_ins'" style="width:600px;height:650px;padding:10px">
+    	<form id="board_ins" method="get" action="boardInsert.sp4">
+    	<input type="hidden" name = bm_no" value="0">
+    	<input type="hidden" name = bm_group" value="0">
+    	<input type="hidden" name = bm_pos" value="0">
+    	<input type="hidden" name = bm_step" value="0">
+    	<div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="bm_title" label="제목:" labelPosition="top" data-options="prompt:'제목'" style="width:400px;">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="bm_writer" label="작성자:" labelPosition="top" data-options="prompt:'작성자'" style="width:250px;">
+        </div>        
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="bm_content" label="내용:" labelPosition="top" data-options="prompt:'내용',multiline:true, width:500, height:120">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="bm_email" label="Email:" labelPosition="top" data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="bm_pw" label="비밀번호:" labelPosition="top" style="width:200;">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-filebox" name="bs_file" label="첨부파일:" labelPosition="top" data-options="width:'400px'" >
+        </div>
+    	</form>
+    </div>
+    <div id="ft_ins">
+		<a href="javascript:insAction()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">저장</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">취소</a>
+	</div>   
+    <!--=========================== [[글쓰기 화면   끝 ]] =============================--> 
+	<div id=dlg_upd></div>
 </body>
 </html>

@@ -56,6 +56,20 @@ public class Board41Controller extends MultiActionController {
 		// view.forward(req, res);
 		return mav;
 	}
+	public ModelAndView updateForm(HttpServletRequest req, HttpServletResponse res)
+								throws Exception {
+		logger.info("Board41Controller ==> updateForm 호출 성공");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	target	= new HashMap<>();
+		hmb.bindPost(target);
+		logger.info("bm_no: " + target.get("bm_no"));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/updateForm"); // 이것이 UI/UX가 된다, 페이지 이름
+		mav.addObject("target", target);
+		// RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		// view.forward(req, res);
+		return mav;
+	}
 	/*****************************************************************************
 	 * 게시글 상세보기 구현
 	 * @param req

@@ -9,17 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jEasyUI 시작 -->
 <link rel="stylesheet" type="text/css" href="<%=path.toString() %>themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=path.toString() %>themes/icon.css"> 
 <!-- jEasyUI JS 시작 -->
 <script type="text/javascript" src="<%=path.toString() %>js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path.toString() %>js/jquery.easyui.min.js"></script> 
-	<script type="text/javascript">
+<script type="text/javascript">
 		function insAction(){
 			console.log("입력액션 호출");
 		    $('#board_ins').submit();
 		}
-	</script>
+</script>
 </head>
 <body>
 	 <!-- ================================== [[글쓰기 화면 시작]] =============================================== -->

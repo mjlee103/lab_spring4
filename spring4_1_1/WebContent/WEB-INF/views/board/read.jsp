@@ -6,31 +6,41 @@
 	path.append("/");
 	List<Map<String,Object>> boardDetail = null;
 	boardDetail = (List<Map<String,Object>>)request.getAttribute("boardDetail");
+	
 	int size = 0;
 	String bm_email 	= null;
 	String bs_file 		= null;
 	String bm_title 	= null;
 	String bm_writer 	= null;
 	String bm_content 	= null;
-	String bm_pwd 		= null;
+	String bm_pw 		= null;
 	String bm_no		= null;
 	String bm_group 	= null;
 	String bm_pos 		= null;
 	String bm_step 		= null;
+	
 	if(boardDetail!=null){
-		size = boardDetail.size();		
-		bm_email = boardDetail.get(0).get("BM_EMAIL").toString();
-		bs_file = boardDetail.get(0).get("BS_FILE").toString();
-		bm_title = boardDetail.get(0).get("BM_TITLE").toString();
-		bm_writer = boardDetail.get(0).get("BM_WRITER").toString();
-		bm_content = boardDetail.get(0).get("BM_CONTENT").toString();
-		bm_pwd = boardDetail.get(0).get("BM_PW").toString();
-		bm_no = boardDetail.get(0).get("BM_NO").toString();
-		bm_group = boardDetail.get(0).get("BM_GROUP").toString();
-		bm_pos = boardDetail.get(0).get("BM_POS").toString();
-		bm_step = boardDetail.get(0).get("BM_STEP").toString();
+		size = boardDetail.size();
+		Map<String,Object> rmap = boardDetail.get(0);
+		bm_title = rmap.get("BM_TITLE").toString();
+		bm_writer = rmap.get("BM_WRITER").toString();
+		if(rmap.get("BM_EMAIL")!=null){
+			bm_email = rmap.get("BM_EMAIL").toString();		
+		}else{
+			bm_email = "";
+		}
+		bm_content = rmap.get("BM_CONTENT").toString();
+		bm_no = rmap.get("BM_NO").toString();
+		bm_group = rmap.get("BM_GROUP").toString();
+		bm_pos = rmap.get("BM_POS").toString();
+		bm_step = rmap.get("BM_STEP").toString();
+		if(rmap.get("BM_PW")!=null){
+			bm_pw = rmap.get("BM_PW").toString();		
+		}else{
+			bm_pw = "";
+		}
 	}
-	out.print("boardDetail : "+boardDetail);
+	out.print("boardDetail:"+boardDetail);
 	//out.print("boardDetail:"+boardDetail); <-주소번지 알려주는 코드>
 %> 
 <!DOCTYPE html>
@@ -45,13 +55,18 @@
 <script type="text/javascript" src="<%=path.toString() %>js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=path.toString() %>js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-//댓글쓰기
+
+//.submit(); 값 변화 전송 
+	function boardList(){
+		location.href="./getBoardList.sp4";
+	}
+	//댓글쓰기
 	function repleForm(){
 		$("#dlg_ins").dialog('open');
 	}
-	function insAction(){
-		console.log("입력액션 호출");
-		$('#board_ins').submit();
+	function updAction(){
+		console.log("수정액션 호출");
+		$("#board_upd").submit();
 	}
 	function updateForm(){
 		console.log("저장액션 호출");
@@ -61,14 +76,47 @@
 		    height: 600,
 		    closed: false,
 		    cache: false,
-		    href: 'updateForm.sp4?bm_writer=<%=bm_writer%>&bm_content=<%=bm_content%>&bm_no=<%=bm_no%>&bs_file=<%=bs_file%>',
+		    // 'updateForm.sp4에서 jsp 로 변경해줌' 이유는???? 210619 모름...
+		    href: 'updateForm.jsp?bm_title=<%=bm_title%>&bm_writer=<%=bm_writer%>&bm_content=<%=bm_content%>&bm_no=<%=bm_no%>&bs_file=<%=bs_file%>',
 		    modal: true
 		});
 	}
-	function boardList(){
-		location.href="./getBoardList.sp4";
+	
+//[[[[[[[[[[[[[[[ 삭제기능 처음 ]]]]]]]]]]]]]]]]]
+	function boardDelclose(){
+		$("#dlg_del").dialog('close');
 	}
+	function boardDelAction(){
+		console.log("삭제확인 호출");
+		//db에서 가져온 값 비교 
+		let db_pw = <%=bm_pw%>;
+		//사용자가 입력한 비밀번호
+		let u_pw = $("#user_pw").textbox('getValue');
+		if(db_pw == u_pw){
+			$.messager.confirm('Confirm', '정말 삭제할거야?',function(r){
+				if(r){
+					location.href="boardDel.sp4?bm_no=<%=bm_no%>&bs_file=<%=bs_file%>";
+				}
+			});
+		}else {
+			alert("비번이 틀립니다.");
+			return; //if 문에서 return 만나면 함수 탈출로 이어짐!
+		}
+	}
+	function boardDelView(){ //입력. 
+		$('#dlg_del').dialog({
+		    title: '글삭제',
+		    width: 400,
+		    height: 200,
+		    closed: false,
+		    cache: false,
+		    modal: true
+		});
+	}	
+//[[[[[[[[[[[[[[[ 삭제기능 끝 ]]]]]]]]]]]]]]]]]
+
 </script>
+
 </head>
 <body>
 	<table align="center" id="p" class="easyui-panel" title="글상세보기" data-options="footer:'#tb_read'"
@@ -91,7 +139,7 @@
 	    	</tr>
 	    	<tr>
 	    		<td>비밀번호</td>
-	    		<td><input id="bm_pw" value="<%=bm_pwd%>" name="bm_pw" class="easyui-passwordbox"></td>
+	    		<td><input id="bm_pw" value="<%=bm_pw%>" name="bm_pw" class="easyui-passwordbox"></td>
 	    	</tr>	    	
 	   </table>
 	 <div id="tb_read" style="padding:2px 5px;" align="center">
@@ -100,6 +148,15 @@
 	    <a href="javascript:boardDelView()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">삭제</a>
 	    <a href="javascript:boardList()" class="easyui-linkbutton" iconCls="icon-search" plain="true">목록</a>
 	</div>
+		<!--=========================== [[글삭제 화면 시작]] =============================-->
+    	<div id="dlg_del" class="easyui-dialog" title="비번확인" data-options="closed:true" style="width:600px;height:650px;padding:10px">
+	    	<div style="margin-bottom:20px">
+	            <input class="easyui-textbox" id="user_pw" name="user_pw" label="제목:" labelPosition="top" data-options="prompt:'비번을 입력해.'" style="width:250px;">
+	        </div>
+	        <a href="javascript:boardDelAction()" class="easyui-linkbutton" iconCls="icon-ok" style="width:90px">확인</a>
+	        <a href="javascript:boardDelClose()" class="easyui-linkbutton" iconCls="icon-cancel" style="width:90px">닫기</a>
+        </div>
+		<!--=========================== [[글삭제 화면 시작]] =============================-->
 		<!--=========================== [[글쓰기 화면 시작]] =============================-->
     <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'false', footer:'#ft_ins'" style="width:600px;height:650px;padding:10px">
     	<form id="board_ins" method="get" action="boardInsert.sp4">

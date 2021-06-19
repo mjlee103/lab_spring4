@@ -1,5 +1,6 @@
 package web.mvc;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -73,5 +74,36 @@ public class Board41Logic {
 		return result;
 	}
 
+	public int boardUpdate(Map<String, Object> pmap) {
+		logger.info("boardUpdate 호출 성공");
+		int result = 0;
+		result = boardMDao.boardMUpdate(pmap);
+		return result;
+	}
 
-}
+	public int boardDelete(Map<String, Object> pmap) {
+		logger.info("boardUpdate 호출 성공");
+		int result = 0;
+		try {
+			result = boardMDao.boardMDelete(pmap);
+			if(result == 1) {
+			String filePath = "C:\\portfolio_kosmo\\lab_spring4\\spring4_1_1\\WebContent\\pds\\";
+			String filename = pmap.get("bs_file").toString();
+			String fullName = filePath+filename;
+			//실제로 존재하는 파일 이름을 객체로 생성해주는 클래스
+			File file = new File(fullName);
+			if(file !=null ) {
+				if(file.exists()) {
+					boolean isOk = file.delete();
+					logger.info(isOk);
+					pmap.put("bs_seq", 1); //bs seq 컬럼의 값을 상수 1로 박아둠. 
+					boardSDao.boardSDelete(pmap);
+					}
+				}
+			}
+		}catch (Exception e) {
+			logger.info("Exception: " + e.toString());
+		}
+		return result;
+	}
+}//////////////////////////end of boardDelete

@@ -18,15 +18,7 @@ public class Board41MDao {
 
 	public List<Map<String, Object>> getBoardList(Map<String, Object> pmap) {
 		List<Map<String, Object>> boardList = null;
-		// List<BoardMVO> boardList2 = null;
 		boardList = sqlSessionTemplate.selectList("getBoardList", pmap);
-		// boardList2 = sqlSessionTemplate.selectList("getBoardMap",pmap);
-//		for(BoardMVO bmvo:boardList2) {
-//			logger.info("bmvo : "+bmvo);
-//			logger.info("bmvo : "+bmvo.getBm_title());
-//			logger.info("bmvo : "+bmvo.getBsVO().getBs_file());
-//			logger.info("bmvo : "+bmvo.getBs_file());
-//		}
 		return boardList;
 	}
 
@@ -66,6 +58,21 @@ public class Board41MDao {
 		logger.info("Board41MDao ==> getBmNo() 호출 성공");
 		int result = 0;
 		result = sqlSessionTemplate.selectOne("getBmNo");
+		return result;
+	}
+
+	public int boardMUpdate(Map<String, Object> pmap) {
+		logger.info("Board41MDao ==> boardMUpdate호출 성공");
+		int result = 0;
+		result = sqlSessionTemplate.update("boardMUpdate", pmap);
+		return result;
+		
+	}
+
+	public int boardMDelete(Map<String, Object> pmap) {
+		logger.info("Board41MDao ==> boardDelete 호출 성공");
+		int result = 0;
+		result = sqlSessionTemplate.delete("baordMDel", pmap);
 		return result;
 	}
 

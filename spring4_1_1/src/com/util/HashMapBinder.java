@@ -29,6 +29,29 @@ public class HashMapBinder {
 		this.request = request;
 		realFolder = "C:\\portfolio_kosmo\\lab_spring4\\spring4_1_1\\WebContent\\pds";
 	}
+	
+	public void bind(Map<String, Object> target) {
+		Enumeration<String> en = request.getParameterNames();
+		//<input type = "text" name = "mem_id">
+		while(en.hasMoreElements()) {
+			String key = (String)en.nextElement();
+			logger.info("value : " + request.getParameter(key));
+//			target.put(key, HangulConversion.toUTF(request.getParameter(key)));
+			target.put(key, request.getParameter(key));
+			logger.info("value : " + target);
+		}
+	}
+	public void bindPost(Map<String, Object> target) {
+		Enumeration<String> en = request.getParameterNames();
+		//<input type = "text" name = "mem_id">
+		while(en.hasMoreElements()) {
+			String key = (String)en.nextElement();
+			logger.info("value : " + request.getParameter(key));
+			target.put(key, HangulConversion.toUTF(request.getParameter(key)));
+			logger.info("value : " + target);
+		}
+	}
+	
 	public void multiBind(Map<String, Object> target) {
 		target.clear();
 		try {
@@ -66,25 +89,5 @@ public class HashMapBinder {
 			}
 		}
 	}
-	public void bindPost(Map<String, Object> target) {
-		Enumeration<String> en = request.getParameterNames();
-		//<input type = "text" name = "mem_id">
-		while(en.hasMoreElements()) {
-			String key = (String)en.nextElement();
-			logger.info("value : " + request.getParameter(key));
-			target.put(key, HangulConversion.toUTF(request.getParameter(key)));
-			logger.info("value : " + target);
-		}
-	}
-	public void bind(Map<String, Object> target) {
-		Enumeration<String> en = request.getParameterNames();
-		//<input type = "text" name = "mem_id">
-		while(en.hasMoreElements()) {
-			String key = (String)en.nextElement();
-			logger.info("value : " + request.getParameter(key));
-//			target.put(key, HangulConversion.toUTF(request.getParameter(key)));
-			target.put(key, request.getParameter(key));
-			logger.info("value : " + target);
-		}
-	}
+
 }

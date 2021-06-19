@@ -20,6 +20,7 @@
 	<bean id = "url-mapping" class = "org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>				
+				<prop key = "/board/boardDel.sp4">board-controller</prop>
 				<prop key = "/board/updateForm.sp4">board-controller</prop>
 				<prop key = "/board/getBoardList.sp4">board-controller</prop>
 				<prop key = "/board/getBoardDetail.sp4">board-controller</prop>
@@ -39,6 +40,7 @@
 		<property name="mappings">
 			<props>
 			
+				<prop key="/board/boardDel.sp4">boardDelete</prop>
 				<prop key="/board/updateForm.sp4">updateForm</prop>
 				<prop key="/upload/uploadForm.sp4">uploadForm</prop>
 				<prop key = "/board/getBoardDetail.sp4">getBoardDetail</prop>

@@ -18,6 +18,7 @@
 		<result property="bs_file" column="bs_file" />
 		<result property="bs_size" column="bs_size" />
 	</resultMap>
+	
 	<delete id="baordMDel" parameterType="map">
 		DELETE FROM board_master2019 WHERE bm_no=#{bm_no}
 	</delete>
@@ -86,5 +87,15 @@
 	<select id="test" parameterType="map" resultType="string">
 		SELECT TO_CHAR(sysdate, 'YYYY-MM-DD') from dual
 	</select>
+	
+	<update id="boardMUpdate" parameterType="map">
+		UPDATE board_master2019
+				SET bm_title = #{bm_title}
+				   ,bm_writer = #{bm_writer}
+				   ,bm_content = #{bm_content}
+				   ,bm_email = #{bm_email}
+				   ,bm_pw = #{bm_pw}
+				WHERE bm_no = #{bm_no}	
+	</update>
     
 </mapper>

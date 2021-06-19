@@ -40,6 +40,7 @@ public class Board41Controller extends MultiActionController {
 
 	// 1. ModelAndView로 반환하는 경우
 	// ModelAndView를 만나 WEB-INF에 간다
+	//****modelandview 클래스는 컨트롤러의 처리 결과를 보여 줄 뷰와 뷰에 전달할 값을 저장하는 용도. ****
 	public ModelAndView getBoardList(HttpServletRequest req, HttpServletResponse res)
 								throws Exception {
 		logger.info("Board41Controller ==> getBoardList() 호출 성공");
@@ -78,23 +79,6 @@ public class Board41Controller extends MultiActionController {
 	 * @throws Exception
 	 * 주의사항 - 전체조회와 하나로 합쳐 지니까 target에 구분값을 추가할것.
 	 ****************************************************************************/
-	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res)
-								throws Exception {
-		logger.info("Board41Controller ==> getBoardDetail() 호출 성공");
-		HashMapBinder		hmb		= new HashMapBinder(req);
-		Map<String, Object>	target	= new HashMap<>();
-		hmb.bind(target); // bm_no값 담음.
-		target.put("gubun", "detail");
-		logger.info("bm_no : " + target.get("bm_no"));
-		List<Map<String,Object>> boardDetail = null;
-		boardDetail=boardLogic.getBoardList(target);
-		logger.info("boardDetail: " + boardDetail);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/read");
-		mav.addObject("boardDetail", boardDetail);
-		return mav;
-	}
-
 	// 2.json으로 반환하는 경우
 	// json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView,
 	// String
@@ -112,6 +96,24 @@ public class Board41Controller extends MultiActionController {
 		PrintWriter out = res.getWriter();
 		out.print(imsi);
 	}
+
+	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res)
+								throws Exception {
+		logger.info("Board41Controller ==> getBoardDetail() 호출 성공");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	target	= new HashMap<>();
+		hmb.bind(target); // bm_no값 담음.
+		target.put("gubun", "detail");
+		logger.info("bm_no : " + target.get("bm_no"));
+		List<Map<String,Object>> boardDetail = null;
+		boardDetail=boardLogic.getBoardList(target);
+		logger.info("boardDetail: " + boardDetail);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/read"); //ui/ux = 페이지 이름.
+		mav.addObject("boardDetail", boardDetail);//("키", value)
+		return mav;
+	}
+
 
 	public void boardInsert(HttpServletRequest req, HttpServletResponse res)
 								throws Exception {
@@ -133,4 +135,39 @@ public class Board41Controller extends MultiActionController {
 		}
 	}
 
+	public void boardUpdate(HttpServletRequest req, HttpServletResponse res)
+								throws Exception {
+		logger.info("boardUpdate 호출 성공");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pmap	= new HashMap<>();
+		// 사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
+		//hmb.bindPost(pmap);
+		//hmb.multiBind(pmap);
+		hmb.bind(pmap);
+		int result = 0;
+		result = boardLogic.boardUpdate(pmap);
+		
+		if (result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("동록실패!!!!");
+		}
+	}
+	public void boardDelete(HttpServletRequest req, HttpServletResponse res)
+								throws Exception {
+		logger.info("boardUpdate 호출 성공");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pmap	= new HashMap<>();
+		hmb.bindPost(pmap);
+		int result = 0;
+		result = boardLogic.boardDelete(pmap);
+		
+		if (result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("동록실패!!!!");
+		}
+	}
 }

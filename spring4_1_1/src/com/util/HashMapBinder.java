@@ -18,7 +18,7 @@ public class HashMapBinder {
 	MultipartRequest multi = null;//기존의 request로는 값을 가져오지 못하게 됨.
 	String realFolder = "";
 	//첨부파일 한글처리
-	String encType = "utf-8";
+	String encType = "UTF-8";
 	//첨부파일 크기 제한
 	int maxSize = 5*1024*1024;//5MB	
 	

@@ -62,7 +62,7 @@ public class Board41Controller extends MultiActionController {
 		logger.info("Board41Controller ==> updateForm 호출 성공");
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	target	= new HashMap<>();
-		hmb.bindPost(target);
+		hmb.bindPost(target);//bind와 bindPost의 차이는 한글 변환의 유무 차이 
 		logger.info("bm_no: " + target.get("bm_no"));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/updateForm"); // 이것이 UI/UX가 된다, 페이지 이름

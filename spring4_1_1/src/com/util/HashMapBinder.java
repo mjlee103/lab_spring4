@@ -30,7 +30,7 @@ public class HashMapBinder {
 		realFolder = "C:\\portfolio_kosmo\\lab_spring4\\spring4_1_1\\WebContent\\pds";
 	}
 	
-	public void bind(Map<String, Object> target) {
+	public void bind(Map<String, Object> target) {//한글 변환이 없음. 
 		Enumeration<String> en = request.getParameterNames();
 		//<input type = "text" name = "mem_id">
 		while(en.hasMoreElements()) {
@@ -41,7 +41,7 @@ public class HashMapBinder {
 			logger.info("value : " + target);
 		}
 	}
-	public void bindPost(Map<String, Object> target) {
+	public void bindPost(Map<String, Object> target) {//한글 변환 버전
 		Enumeration<String> en = request.getParameterNames();
 		//<input type = "text" name = "mem_id">
 		while(en.hasMoreElements()) {

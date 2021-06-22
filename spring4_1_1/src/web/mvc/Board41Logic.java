@@ -14,14 +14,8 @@ public class Board41Logic {
 		this.boardMDao = boardMDao;
 	}
 
-	private Board41SDao boardSDao = null;
-
-	public void setBoardSDao(Board41SDao boardSDao) {
-		this.boardSDao = boardSDao;
-	}
-
 	public List<Map<String, Object>> getBoardList(Map<String, Object> pmap) {
-		logger.info("getBoardLsit 호출 성공"+pmap.containsKey("gubun"));
+		logger.info("getBoardLsit 호출 성공"+pmap.containsKey("gubun"));//gubun이라는 이름을 가진 key가 존재한다면 true/false 출력
 		List<Map<String, Object>> boardList = null;
 		String gubun = null;
 		if(pmap.get("gubun")!=null) { //그저 조회만 했을 경우 gubun = null이기 때문에 실행 ㄴㄴ

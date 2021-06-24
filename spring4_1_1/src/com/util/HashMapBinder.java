@@ -23,10 +23,12 @@ public class HashMapBinder {
 	int maxSize = 5*1024*1024;//5MB	
 	
 	HttpServletRequest request = null;
+	//생성자
 	public HashMapBinder() {}
 	
 	public HashMapBinder(HttpServletRequest request) {
 		this.request = request;
+		//첨부 파일의 경로 
 		realFolder = "C:\\portfolio_kosmo\\lab_spring4\\spring4_1_1\\WebContent\\pds";
 	}
 	

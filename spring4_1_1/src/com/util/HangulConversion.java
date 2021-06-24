@@ -1,5 +1,6 @@
 package com.util;
 
+//한글 변환해 주는 파일 
 public class HangulConversion {
 	public static String toUTF(String en) {
 		if(en == null ) return null;

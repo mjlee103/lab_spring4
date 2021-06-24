@@ -1,6 +1,7 @@
 package com.vo;
 
 public class BoardSVO {
+	//전역변수 선언
 	int 	bm_no     	=	0;
 	int 	bs_seq  	=	0;
 	String 	bs_file 	=	"";

@@ -1,6 +1,7 @@
 package com.vo;
 
 public class BoardMVO {
+	//전역 변수 선언
 	 int 		bm_no      = 0;
 	 String  	bm_title   = "";
 	 String  	bm_writer  = "";

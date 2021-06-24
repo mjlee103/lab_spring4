@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- mapper 파일의 경로 -->
 <mapper namespace="com.mybatis.mapper.BoardMapper">
 	<resultMap id="boardMMap" type="bmVO">
 		<result property="bm_no" column="bm_no" />

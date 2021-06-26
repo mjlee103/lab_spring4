@@ -39,7 +39,7 @@ public class Board41SDao {
 	public int boardSDelete(Map<String, Object> pmap) {
 		logger.info("boardMInsert 호출 성공");
 		int result = 0;
-		sqlSessionTemplate.insert("boardMDel", pmap);
+		sqlSessionTemplate.delete("boardMDel", pmap);
 		return result;
 	}
 

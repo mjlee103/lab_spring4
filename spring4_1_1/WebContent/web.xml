@@ -39,21 +39,4 @@
 		<url-pattern>*.sp4</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 연습!!!!!!!!!!! -->
-	<servlet>
-		<servlet-name>appServlet2</servlet-name> <!-- org.도메인.패키지.표준.class(디스패쳐서블릿) -->
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/prac-servlet.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>appServlet2</servlet-name>
-		<url-pattern>*.hr4</url-pattern>
-	</servlet-mapping>
-	<!-- 연습끝!!!!!!!!! -->
-	
 </web-app>

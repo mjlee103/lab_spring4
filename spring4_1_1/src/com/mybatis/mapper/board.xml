@@ -9,9 +9,9 @@
 		<result property="bm_title" column="bm_title" />
 		<result property="bm_date" column="bm_date" />
 		<result property="bm_hit" column="bm_hit" />
-		<result property="bs_seq" column="bs_seq" />
+<!-- 		<result property="bs_seq" column="bs_seq" />
 		<result property="bs_file" column="bs_file" />
-		<result property="bs_size" column="bs_size" />
+		<result property="bs_size" column="bs_size" /> -->
 	</resultMap>
 	<resultMap id="boardSMap" type="bsVO">
 		<result property="bm_no" column="bm_no" />
